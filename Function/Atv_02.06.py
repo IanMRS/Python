@@ -3,6 +3,15 @@ import os
 from termcolor import colored
 import funcoes as fc
 
+cores = {'limpa': '\033[m',
+         'vermelho': '\033[31m',
+         'verde': '\033[32m',
+         'amarelo': '\033[33m',
+        'azul': '\033[34m',
+        'magenta' :'\033[35m', 
+        'ciano': '\033[36m',
+        'grey': '\033[37m'}
+
 Q = int(input('Questão qual? '))
 os.system ('cls')
 if (Q ==1):
@@ -96,13 +105,13 @@ if(Q == 9):
 if(Q == 10):
     def conversor(horas, minutos):
         if horas < 12:
-            periodo = 'A.M'
+            periodo = 'A'
         else:
-            periodo = 'P.M'
+            periodo = 'P'
             horas = horas - 12
         return horas, minutos, periodo
     def printar (horas_c, minutos_c, periodo):
-        print(colored(f'\nA notação em 12 horas será: {horas_c}:{minutos_c} {periodo}', 'green'))
+        print(colored(f'\nA notação em 12 horas será: {horas_c}:{minutos_c} {periodo}.M', 'green'))
          
     while True:
         horas = int(input('Digite as horas (formato 24hrs) '))
@@ -115,24 +124,18 @@ if(Q == 10):
         if opcao == 'N':
             break
         
-        
-        
 if(Q == 11):
-    def converter_notacao(horas, minutos):
-        periodo = 'A.M.' if horas < 12 else 'P.M.'
-        horas = horas % 12 if horas % 12 != 0 else 12
-        return horas, minutos, periodo
-
-    def imprimir_notacao(horas, minutos, periodo):
-        print(f"A notação de 12 horas é: {horas}:{minutos:02d} {periodo}")
-
-    while True:
-        horas = int(input("Digite as horas (formato de 24 horas): "))
-        minutos = int(input("Digite os minutos: "))
-
-        horas_convertidas, minutos_convertidos, periodo = converter_notacao(horas, minutos)
-        imprimir_notacao(horas_convertidas, minutos_convertidos, periodo)
-
-        opcao = input("Deseja converter novamente? (S/N): ")
-        if opcao.upper() != "S":
+    def valorPagamento (prestacao,dias):
+        valor_final = prestacao+(prestacao*((3+(dias/10))/100))
+        return valor_final
+        
+        
+        
+    while True:   
+        prestacao = float(input('Qual o valor da prestação? '))
+        if prestacao == 0:
             break
+        dias = float(input('Quantos dias teve de atraso? '))
+        os.system('cls')
+        valor_final = valorPagamento(prestacao,dias)
+        print(f'Valor a ser pago será {cores["ciano"]}{valor_final}{cores["limpa"]}')
