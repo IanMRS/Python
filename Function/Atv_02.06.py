@@ -125,6 +125,8 @@ if(Q == 10):
             break
         
 if(Q == 11):
+    total = valor_deTodas = 0
+    
     def valorPagamento (prestacao,dias):
         valor_final = prestacao+(prestacao*((3+(dias/10))/100))
         return valor_final
@@ -132,10 +134,21 @@ if(Q == 11):
         
         
     while True:   
-        prestacao = float(input('Qual o valor da prestação? '))
+        prestacao = float(input('\n\nQual o valor da prestação? '))
         if prestacao == 0:
             break
         dias = float(input('Quantos dias teve de atraso? '))
+        
+        
         os.system('cls')
         valor_final = valorPagamento(prestacao,dias)
-        print(f'Valor a ser pago será {cores["ciano"]}{valor_final}{cores["limpa"]}')
+        total +=1
+        valor_deTodas += valor_final
+        print(f'\nValor a ser pago será {cores["ciano"]}R$ {valor_final}{cores["limpa"]}')
+    print(colored('-=', 'red')*20)
+    print(colored('RELATORIO DO DIA', 'red'))
+    print(colored('-=', 'red')*20)
+    print(f'Quantidade de prestações foi {cores["ciano"]}{total}{cores["limpa"]}')
+    print(f'E o valor de todas as de prestações foi {cores["ciano"]}R$ {valor_deTodas}{cores["limpa"]}')
+        
+        
